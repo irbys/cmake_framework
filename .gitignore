@@ -1,32 +1,11 @@
-# Prerequisites
-*.d
+### All build folders ###
+build*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+### CMake ###
+CMakeCache.txt
 
-# Precompiled Headers
-*.gch
-*.pch
+### Autosave file version ###
+*.autosave
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Qt Ctreator CMake
+CMakeLists.txt.user*

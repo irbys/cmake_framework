@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(test)
+include(cmake/bootstrap.cmake)
+
+add_executable(test main.cpp)
