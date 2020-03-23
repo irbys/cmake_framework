@@ -17,6 +17,12 @@ class Collection
     void get_heap_use_after_free();
     void get_heap_buffer_overflow();
     void get_stack_buffer_overflow();
+    void get_global_buffer_overflow();
+    void get_stack_use_after_return();
+    void get_stack_use_after_scope();
+    // TODO https://github.com/google/sanitizers/wiki/AddressSanitizerInitializationOrderFiasco
+    // + strict-order
+    void get_memory_leaks();
 };
 
 } // namespace issue

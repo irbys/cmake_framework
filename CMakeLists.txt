@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(SANITIZER_DETECTOR)
+project(san-detector)
 include(cmake/bootstrap.cmake)
 
 add_executable(${PROJECT_NAME}
