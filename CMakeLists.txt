@@ -1,13 +1,34 @@
-cmake_minimum_required(VERSION 3.16)
-project(san-detector)
-include(cmake/bootstrap.cmake)
+cmake_minimum_required( VERSION 3.10 )
 
-add_executable(${PROJECT_NAME}
-               src/app/sanitizer_detector/main.cpp
-               src/sanitizer/address/issue/collection.hpp
-               src/sanitizer/address/issue/collection.cpp
-               src/sanitizer/undefined/issue/collection.hpp
-               src/sanitizer/undefined/issue/collection.cpp
-               )
+project( san-issue-detector )
 
-target_include_directories(${PROJECT_NAME} PRIVATE src)
+include( ${CMAKE_SOURCE_DIR}/cmake/sanitizers.cmake  )
+
+set( HEADERS
+    ""
+)
+
+set( SOURCES
+    "app/main.cpp"
+    "src/uni/asan/collection.hpp"
+    "src/uni/asan/collection.cpp"
+    "src/uni/tsan/collection.hpp"
+    "src/uni/tsan/collection.cpp"
+    "src/uni/ubsan/collection.hpp"
+    "src/uni/ubsan/collection.cpp"
+)
+
+add_executable( ${PROJECT_NAME}
+    ${HEADERS}
+    ${SOURCES}
+)
+
+target_include_directories( ${PROJECT_NAME}
+    PRIVATE
+        ${SOURCE_DIR}/san-issue-detector/src
+)
+
+target_link_libraries( ${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_THREAD_LIBS_INIT}
+)

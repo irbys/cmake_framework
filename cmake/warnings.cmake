@@ -1,2 +1,0 @@
-set(WARNINGS_CXX_FLAGS "-Wall -Wextra -Weffc++")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS_CXX_FLAGS}")
