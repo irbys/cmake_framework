@@ -7,38 +7,20 @@
 
 namespace
 {
-void
-simple_increment( int32_t& var )
-{
-    ++var;
-};
-
 class A
 {
 public:
     A( ) = default;
     virtual ~A( )
     {
-        std::unique_lock< std::mutex > lock( mutex );
-        cv.wait( lock, [this]( ) { return ready; } );
+        using namespace std::chrono_literals;
+        std::this_thread::sleep_for( 5000ms );
     }
 
     virtual void
     F( )
     {
     }
-
-    void
-    set_ready( bool ready )
-    {
-        std::lock_guard< std::mutex > lock{ mutex };
-        this->ready = ready;
-        cv.notify_all( );
-    }
-
-    bool ready{ false };
-    std::mutex mutex{};
-    std::condition_variable cv{};
 };
 
 class B : public A
@@ -85,6 +67,12 @@ deadlock2( )
 
 }  // namespace
 
+void
+simple_increment( int32_t& var )
+{
+    ++var;
+};
+
 namespace uni
 {
 namespace tsan
@@ -111,7 +99,6 @@ Collection::get_vptr_data_races( )
 
     std::thread thread( remove_object, ptr );
     ptr->F( );
-    ptr->set_ready( true );
     thread.join( );
 
     std::cout << "~VPTR_DATA_RACES" << std::endl;

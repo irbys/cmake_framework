@@ -57,6 +57,7 @@ Collection::get_misaligned_pointer( )
     auto buffer = static_cast< int8_t* >( malloc( 8 * 4 ) );
     auto pointer = reinterpret_cast< struct A* >( buffer + 1 );
     pointer->i32 = 7;
+    delete buffer;
     std::cout << "~Misaligned structure pointer assignment" << std::endl;
 }
 
