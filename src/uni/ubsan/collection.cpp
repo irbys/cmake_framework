@@ -14,10 +14,12 @@ struct Base
 {
     int32_t pad1;
 };
+
 struct Derived : Base
 {
     int32_t pad2;
 };
+
 Derived*
 get_derived( )
 {
@@ -135,13 +137,15 @@ Collection::get_dynamic_type_violation( )
 }
 
 void
-Collection::get_invalid_float_cast( )
+Collection::get_float_cast_overflow( )
 {
-    std::cout << "Invalid float cast" << std::endl;
-    double n = 10e50;
-    auto m = ( float ) n;  // Error: 10e50 can't be represented as a float.
-    std::cout << n << " <-double   float-> " << m << std::endl;
-    std::cout << "~Invalid float cast" << std::endl;
+    std::cout << "Float cast overflow" << std::endl;
+    // Because the range of representable values for all floating-point types supported by Clang is [-inf, +inf], the only cases detected are conversions from floating point to
+    // integer types.
+    float n = 10e50;
+    auto m = ( int ) n;
+    std::cout << n << " <-float   int-> " << m << std::endl;
+    std::cout << "~Float cast overflow" << std::endl;
 }
 
 void
@@ -176,6 +180,7 @@ Collection::get_invalid_object_size( )
     delete x;
 
     std::cout << "~Invalid object size" << std::endl;
+    std::cout << std::endl;
 }
 
 }  // namespace ubsan

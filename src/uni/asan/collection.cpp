@@ -12,7 +12,7 @@ int* ptr;
 __attribute__( ( noinline ) ) void
 FunctionThatEscapesLocalObject( )
 {
-    int local[ 100 ] = { 50 };
+    int32_t local[ 100 ] = { 50 };
     ptr = &local[ 0 ];
 }
 }  // namespace
@@ -21,9 +21,9 @@ void
 Collection::get_heap_use_after_free( )
 {
     std::cout << "HEAP_USE_AFTER_FREE" << std::endl;
-    uint32_t* array = new uint32_t[ 100 ];
+    auto* array = new uint64_t[ 100 ];
     delete[] array;
-    std::cout << array[ 55 ] << std::endl;
+    array[ 55 ] = 10;
     std::cout << "~HEAP_USE_AFTER_FREE" << std::endl;
 }
 
@@ -32,8 +32,7 @@ Collection::get_heap_buffer_overflow( )
 {
     std::cout << "HEAP_BUFFER_OVERFLOW" << std::endl;
     uint64_t* array = new uint64_t[ 100 ];
-    array[ 0 ] = 0;
-    int res = array[ 1 + 100 ];
+    auto res = array[ 1 + 100 ];
     delete[] array;
     std::cout << res << std::endl;
     std::cout << "~HEAP_BUFFER_OVERFLOW" << std::endl;
@@ -88,6 +87,8 @@ Collection::get_memory_leaks( )
     x[ 50 ] = 500;
     std::cout << x[ 50 ] << std::endl;
     std::cout << "~Memory leaks" << std::endl;
+
+    std::cout << std::endl;
 }
 
 }  // namespace asan

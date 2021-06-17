@@ -16,7 +16,6 @@ class Collection
 public:
     void get_normal_data_races( );
     void get_vptr_data_races( );
-    void get_heap_use_after_free( );
     void get_potential_deadlock( );
 };
 

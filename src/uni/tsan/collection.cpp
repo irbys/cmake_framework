@@ -118,16 +118,6 @@ Collection::get_vptr_data_races( )
 }
 
 void
-Collection::get_heap_use_after_free( )
-{
-    std::cout << "HEAP_USE_AFTER_FREE" << std::endl;
-    uint32_t* array = new uint32_t[ 100 ];
-    delete[] array;
-    std::cout << array[ 55 ] << std::endl;
-    std::cout << "~HEAP_USE_AFTER_FREE" << std::endl;
-}
-
-void
 Collection::get_potential_deadlock( )
 {
     std::cout << "POTENTIAL DEADLOCK" << std::endl;

@@ -21,15 +21,14 @@ main( )
     ub_collection.get_out_of_bounds_array( );
     ub_collection.get_invalid_enumeration( );
     ub_collection.get_dynamic_type_violation( );
-    ub_collection.get_invalid_float_cast( );
-    // ub_collection.get_division_by_zero();
-    // ub_collection.get_nullptr_violation();
+    ub_collection.get_float_cast_overflow( );
+    //    ub_collection.get_division_by_zero( );
+    //    ub_collection.get_nullptr_violation( );
     ub_collection.get_invalid_object_size( );
 
     uni::tsan::Collection tsan_collection;
     tsan_collection.get_normal_data_races( );
     tsan_collection.get_vptr_data_races( );
-    tsan_collection.get_heap_use_after_free( );
     tsan_collection.get_potential_deadlock( );
 
     return 0;
